@@ -1,1 +1,13 @@
- 
+## https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+
+[Unit]
+Description=Fan Control Daemon (https://github.com/etheling/rpi-fancontrol)
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/sbin/fancontrol.py
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
