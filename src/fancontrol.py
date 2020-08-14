@@ -54,7 +54,7 @@ def get_cpu_temp():
     try:
         return float(temp_str.split('=')[1].split('\'')[0])
     except (IndexError, ValueError):
-        log_alert ("ALERT: cannot parse GPU temp. Returning 255C."); # -> fan on
+        log_alert ("ALERT: cannot parse CPU temp. Returning 255C."); # -> fan on
         return 255
 
 
@@ -86,12 +86,12 @@ if __name__ == '__main__':
 
         ## if fan is off, and we've reached either of the 'on' tresholds -> ON
         if fstatus == 0 and fanon == 1:
-            log_info ("Fan ON: CPU: " +str(cpu_temp) + ", GPU: " +str(gpu_temp))
+            log_info ("Fan ON: CPU: " +str(cpu_temp))
             fan.on()
 
         ## if fan is on, and we're below both 'off' thresholds -> OFF
         if fstatus == 1 and fanon == 0:
-            log_info ("Fan OFF: CPU: " +str(cpu_temp) + ", GPU: " +str(gpu_temp))
+            log_info ("Fan OFF: CPU: " +str(cpu_temp))
             fan.off()
             
         time.sleep(SLEEP_INTERVAL)
